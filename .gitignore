@@ -1,0 +1,19 @@
+# Arquivos temporários do Word
+~$*
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Chaves e secrets (nunca commitar!)
+*.pem
+*.key
+datakeyPlainText.txt
+
+# Uso pessoal (não publicar)
+PADRAO-LABORATORIOS.md
+
+# Projetos ainda em desenvolvimento (não publicar até finalizar)
+03-chaves-multi-regiao/
+04-monitoramento-rotacao/
