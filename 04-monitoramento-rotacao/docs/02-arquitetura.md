@@ -20,10 +20,6 @@ A partir dessa mesma origem, o laboratório segue por dois caminhos:
 
 ### Caminho 1: EventBridge + SNS
 
-```
-Rotação → CloudTrail → EventBridge (regra) → SNS → Email
-```
-
 Uma regra do EventBridge filtra o evento `RotateKeyOnDemand` e o encaminha para um tópico SNS, que realiza a entrega por email.
 
 > **Quando usar:** quando a prioridade é reagir a um evento específico, gerar uma notificação imediata ou iniciar uma ação automaticamente.
@@ -31,10 +27,6 @@ Uma regra do EventBridge filtra o evento `RotateKeyOnDemand` e o encaminha para 
 ![Arquitetura do Caminho 1: EventBridge + SNS](assets/arquitetura-caminho-1.png)
 
 ### Caminho 2: CloudWatch Metric Filter + Alarme
-
-```
-Rotação → CloudTrail → Log Group → Metric Filter → Métrica → Alarme → SNS → Email
-```
 
 Nesse fluxo, a trilha do CloudTrail entrega os logs para um **Log Group do CloudWatch**. Um *metric filter* identifica o evento de rotação e transforma suas ocorrências em uma métrica. A partir dela, um alarme pode ser configurado para disparar quando um determinado limite for atingido.
 
