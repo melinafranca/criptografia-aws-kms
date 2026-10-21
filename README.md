@@ -14,8 +14,8 @@ Este repositório reúne laboratórios sobre criptografia com AWS KMS. O projeto
 |---|---------|-----------|--------|
 | 1 | [Lab de Criptografia](01-lab-criptografia/) | Envelope Encryption e criptografia direta via CLI | ✅ Concluído |
 | 2 | [Rotação de Chaves](02-rotacao-de-chaves/) | Rotação automática e sob demanda de material criptográfico | ✅ Concluído |
-| 3 | Chaves Multi-Região | Replicação de chaves entre regiões para Disaster Recovery | 🚧 Em desenvolvimento |
-| 4 | Monitoramento de Rotação | Notificação automática de rotação via EventBridge/SNS e CloudWatch | 🚧 Em desenvolvimento |
+| 3 | [Chaves Multi-Região](03-chaves-multi-regiao/) | Replicação de chaves entre regiões para Disaster Recovery | ✅ Concluído |
+| 4 | [Monitoramento de Rotação](04-monitoramento-rotacao/) | Notificação automática de rotação via EventBridge/SNS e CloudWatch | ✅ Concluído |
 
 ## 🧰 Serviços Utilizados na Jornada
 
@@ -25,6 +25,7 @@ Este repositório reúne laboratórios sobre criptografia com AWS KMS. O projeto
 | Amazon EC2 | Instância Linux para execução dos comandos |
 | AWS IAM | Controle de acesso via roles e policies |
 | AWS Systems Manager | Acesso seguro à instância via Session Manager |
+| AWS CloudShell | Execução de comandos da AWS CLI, incluindo operações entre regiões |
 | AWS CloudTrail | Auditoria de uso das chaves |
 | OpenSSL | Criptografia local com data keys |
 

@@ -67,6 +67,8 @@ As permissões definidas nesta política limitam a atuação da role exclusivame
 4. Revisar a política de confiança e as permissões
 5. Clicar em **Criar função**
 
+> Nota: neste lab de teste, operei diretamente com meu usuário IAM de administrador. A `KMSKeyAdminRole` foi criada para demonstrar a separação de responsabilidades (gerenciamento vs uso), padrão recomendado para ambientes com múltiplas pessoas, onde a equipe assumiria a role em vez de ter permissões diretas.
+
 ---
 
 ## O Que Essa Role Pode e Não Pode Fazer

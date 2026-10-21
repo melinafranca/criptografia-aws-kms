@@ -84,7 +84,7 @@ O parâmetro `--encryption-context` associa um par chave-valor à operação. O 
 {
   "CiphertextBlob": "AQIDAHhz...base64...",
   "Plaintext": "abc123...base64...",
-  "KeyId": "arn:aws:kms:us-east-1:ACCOUNT:key/KEY-ID"
+  "KeyId": "arn:aws:kms:us-east-1:<ACCOUNT_ID>:key/<KEY_ID>"
 }
 ```
 

@@ -2,7 +2,7 @@
 
 Este documento orienta a remoção de todos os recursos criados ao longo dos laboratórios deste repositório. Siga a ordem indicada para evitar erros de dependência.
 
-> Só remova os recursos quando tiver concluído todos os projetos que deseja executar. A chave KMS, a instância EC2 e as roles são reutilizadas no projeto 02 (Rotação de Chaves) e serão reaproveitadas nos próximos laboratórios da jornada.
+> Só remova os recursos quando tiver concluído todos os projetos que deseja executar. A chave `myKMSKey`, a instância EC2 e as roles são compartilhadas entre os projetos 01 (Criptografia) e 02 (Rotação de Chaves). Os projetos 03 (Multi-Região) e 04 (Monitoramento de Rotação) criam recursos próprios e independentes, então podem ser removidos separadamente, sem afetar os demais.
 
 ---
 
@@ -21,7 +21,7 @@ A ordem importa. Alguns recursos dependem de outros para serem removidos correta
 Via CLI:
 
 ```bash
-aws ec2 terminate-instances --instance-ids i-INSTANCE_ID --region us-east-1
+aws ec2 terminate-instances --instance-ids <INSIRA_O_INSTANCE_ID> --region us-east-1
 ```
 
 ---
@@ -55,38 +55,112 @@ Via CLI:
 
 ```bash
 aws kms schedule-key-deletion \
-  --key-id KEY-ID \
+  --key-id <INSIRA_O_KEY_ID> \
   --pending-window-in-days 7 \
   --region us-east-1
 ```
 
-> O `schedule-key-deletion` não aceita alias. Use o Key ID (ou o ARN) da chave. Substitua `KEY-ID` pelo identificador de `myKMSKey`.
+> O `schedule-key-deletion` não aceita alias. Use o Key ID (ou o ARN) da chave. Substitua `<INSIRA_O_KEY_ID>` pelo identificador de `myKMSKey`.
 
 > Durante o período de espera, a chave fica desativada (não pode ser usada para criptografia). Se mudar de ideia, é possível cancelar com `aws kms cancel-key-deletion`.
 
 ---
 
-### 4. Se criou chave multi-região (Projeto 03, em desenvolvimento)
+### 4. Chave Multi-Região (Projeto 03)
 
-Aplicável apenas quando o projeto 03 for executado. Remover primeiro a réplica, depois a primária (o `schedule-key-deletion` exige o Key ID de cada região, não o alias):
+Remover primeiro a réplica, depois a primária (o `schedule-key-deletion` exige o Key ID de cada região, não o alias):
 
 ```bash
 # Agendar exclusão da réplica
 aws kms schedule-key-deletion \
-  --key-id REPLICA-KEY-ID \
+  --key-id <INSIRA_O_REPLICA_KEY_ID> \
   --pending-window-in-days 7 \
   --region eu-west-1
 
 # Agendar exclusão da primária
 aws kms schedule-key-deletion \
-  --key-id PRIMARY-KEY-ID \
+  --key-id <INSIRA_O_PRIMARY_KEY_ID> \
+  --pending-window-in-days 7 \
+  --region us-east-1
+```
+
+> O alias `myMultiRegionKey` existe em cada região. Se a chave já foi agendada para exclusão, ele é removido junto. Para remover antes, use `aws kms delete-alias` em cada região.
+
+---
+
+### 5. Recursos do Monitoramento de Rotação (Projeto 04)
+
+Este projeto cria vários recursos encadeados. Remova na ordem abaixo, do consumidor para a fonte, para evitar erros de dependência.
+
+**Alarme do CloudWatch:**
+
+```bash
+aws cloudwatch delete-alarms --alarm-names kms-rotation-alarm --region us-east-1
+```
+
+**Metric filter:**
+
+```bash
+aws logs delete-metric-filter \
+  --log-group-name aws-cloudtrail-logs-kms-rotation \
+  --filter-name kms-rotation-filter \
+  --region us-east-1
+```
+
+**Regra do EventBridge** (remover o alvo antes da regra):
+
+```bash
+aws events remove-targets --rule kms-rotation-monitor-rule --ids "1" --region us-east-1
+aws events delete-rule --name kms-rotation-monitor-rule --region us-east-1
+```
+
+**Tópico SNS** (remove o tópico e suas assinaturas):
+
+```bash
+aws sns delete-topic --topic-arn arn:aws:sns:us-east-1:<ACCOUNT_ID>:kms-rotation-alerts --region us-east-1
+```
+
+**Trilha do CloudTrail** (parar o logging antes de excluir):
+
+```bash
+aws cloudtrail stop-logging --name kms-rotation-trail --region us-east-1
+aws cloudtrail delete-trail --name kms-rotation-trail --region us-east-1
+```
+
+**Role do CloudTrail para o CloudWatch Logs:**
+
+```bash
+aws iam delete-role-policy \
+  --role-name CloudTrailRoleForCloudWatchLogs-kms-rotation \
+  --policy-name cloudtrail-cwlogs-policy
+aws iam delete-role --role-name CloudTrailRoleForCloudWatchLogs-kms-rotation
+```
+
+**Log Group do CloudWatch:**
+
+```bash
+aws logs delete-log-group --log-group-name aws-cloudtrail-logs-kms-rotation --region us-east-1
+```
+
+**Bucket S3** (esvaziar antes de excluir):
+
+```bash
+aws s3 rm s3://kms-rotation-trail-logs-<ACCOUNT_ID> --recursive
+aws s3 rb s3://kms-rotation-trail-logs-<ACCOUNT_ID>
+```
+
+**Chave `rotationMonitorKey`** (agendar exclusão pelo Key ID):
+
+```bash
+aws kms schedule-key-deletion \
+  --key-id <INSIRA_O_KEY_ID> \
   --pending-window-in-days 7 \
   --region us-east-1
 ```
 
 ---
 
-### 5. Remover a Role da EC2
+### 6. Remover a Role da EC2
 
 Antes de deletar a role, é necessário remover as políticas anexadas e o instance profile.
 
@@ -116,7 +190,7 @@ aws iam delete-role --role-name EC2KMSLabRole
 
 ---
 
-### 6. Remover a Role Admin do KMS
+### 7. Remover a Role Admin do KMS
 
 ```bash
 # Remover política inline
@@ -130,7 +204,7 @@ aws iam delete-role --role-name KMSKeyAdminRole
 
 ---
 
-### 7. Remover o Alias da Chave (opcional)
+### 8. Remover o Alias da Chave (opcional)
 
 Se a chave já foi agendada para exclusão, o alias será removido automaticamente após o período de espera. Para remover antes:
 
@@ -152,14 +226,21 @@ aws ec2 describe-instances --filters "Name=tag:Name,Values=ec2-lab-criptografia"
 aws iam get-role --role-name EC2KMSLabRole 2>&1
 aws iam get-role --role-name KMSKeyAdminRole 2>&1
 
-# Verificar chave KMS
+# Verificar chaves KMS
 aws kms describe-key --key-id alias/myKMSKey --region us-east-1
+aws kms describe-key --key-id alias/rotationMonitorKey --region us-east-1
+
+# Verificar recursos do monitoramento (Projeto 04)
+aws cloudtrail describe-trails --query "trailList[?Name=='kms-rotation-trail']" --region us-east-1
+aws cloudwatch describe-alarms --alarm-names kms-rotation-alarm --region us-east-1
 ```
 
-Se todos retornarem erros (`NoSuchEntity`, `NotFoundException`), a remoção foi concluída.
+Se todos retornarem erros (`NoSuchEntity`, `NotFoundException`) ou listas vazias, a remoção foi concluída.
 
 ---
 
 ## Custo Residual
 
-Após agendar a exclusão da chave KMS, ela para de gerar custo imediatamente (chaves em estado `PendingDeletion` não são cobradas). A instância EC2 para de gerar custo assim que é encerrada.
+Após agendar a exclusão de uma chave KMS, ela para de gerar custo imediatamente (chaves em estado `PendingDeletion` não são cobradas). A instância EC2 para de gerar custo assim que é encerrada.
+
+No Projeto 04, os recursos que geram custo contínuo são o bucket S3 e o Log Group do CloudWatch (armazenamento dos logs). Removê-los encerra esse custo. A trilha do CloudTrail, o EventBridge e o SNS não têm custo relevante para o volume de um laboratório.

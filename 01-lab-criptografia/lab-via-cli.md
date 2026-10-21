@@ -4,9 +4,22 @@ Este documento reúne todos os comandos necessários para reproduzir o laborató
 
 ---
 
+## Contexto de Execução
+
+Os comandos deste guia rodam em dois ambientes diferentes, refletindo a separação entre provisionar/administrar os recursos e usá-los.
+
+| Etapa | Onde executar | Por quê |
+|-------|---------------|---------|
+| 1 a 4 (criar role, chave, role da EC2, instância) | CloudShell ou máquina local (usuário administrador) | São operações de provisionamento e administração |
+| 5 a 8 (envelope encryption, criptografia direta, testes) | Instância EC2 (role da aplicação) | Usam a chave via role restrita, de dentro da instância |
+
+> A separação segue o princípio do menor privilégio: a instância usa a chave, mas não a administra. Um comando administrativo executado pela EC2 retorna `AccessDeniedException` (ver seção 8).
+
+---
+
 ## Pré-requisitos
 
-- AWS CLI configurada com credenciais de um usuário IAM com permissões de administrador
+- AWS CLI configurada com credenciais de um usuário IAM com permissões de administrador (o CloudShell já usa as credenciais do console)
 - Região definida como `us-east-1`
 
 ```bash
@@ -16,6 +29,8 @@ aws configure
 ---
 
 ## 1. Criar a Role de Administração do KMS
+
+🔹 **Ambiente:** CloudShell / máquina local (admin)
 
 ### Trust policy
 
@@ -28,7 +43,7 @@ Salvar como `trust-policy-account.json`:
     {
       "Effect": "Allow",
       "Principal": {
-        "AWS": "arn:aws:iam::ACCOUNT_ID:root"
+        "AWS": "arn:aws:iam::<ACCOUNT_ID>:root"
       },
       "Action": "sts:AssumeRole"
     }
@@ -90,6 +105,8 @@ aws iam get-role --role-name KMSKeyAdminRole
 
 ## 2. Criar a Chave KMS
 
+🔹 **Ambiente:** CloudShell / máquina local (admin)
+
 ### Criar a chave
 
 ```bash
@@ -98,6 +115,20 @@ aws kms create-key \
   --key-usage ENCRYPT_DECRYPT \
   --key-spec SYMMETRIC_DEFAULT \
   --region us-east-1
+```
+
+**Saída (resumida):**
+
+```json
+{
+    "KeyMetadata": {
+        "KeyId": "5477ae28-3cf6-412a-84e0-b03cfb140a9b",
+        "Arn": "arn:aws:kms:us-east-1:<ACCOUNT_ID>:key/5477ae28-3cf6-412a-84e0-b03cfb140a9b",
+        "KeyState": "Enabled",
+        "KeySpec": "SYMMETRIC_DEFAULT",
+        "KeyUsage": "ENCRYPT_DECRYPT"
+    }
+}
 ```
 
 > Copie o `KeyId` retornado para usar nos próximos comandos.
@@ -109,7 +140,7 @@ O alias permite referenciar a chave como `alias/myKMSKey` em vez do Key ID compl
 ```bash
 aws kms create-alias \
   --alias-name alias/myKMSKey \
-  --target-key-id KEY_ID \
+  --target-key-id <INSIRA_O_KEY_ID> \
   --region us-east-1
 ```
 
@@ -122,6 +153,8 @@ aws kms describe-key --key-id alias/myKMSKey --region us-east-1
 ---
 
 ## 3. Criar a Role da EC2
+
+🔹 **Ambiente:** CloudShell / máquina local (admin)
 
 ### Trust policy para EC2
 
@@ -168,7 +201,7 @@ aws iam put-role-policy \
           "kms:Encrypt",
           "kms:Decrypt"
         ],
-        "Resource": "arn:aws:kms:us-east-1:ACCOUNT_ID:key/KEY_ID"
+        "Resource": "arn:aws:kms:us-east-1:<ACCOUNT_ID>:key/<INSIRA_O_KEY_ID>"
       }
     ]
   }'
@@ -190,6 +223,8 @@ aws iam add-role-to-instance-profile \
 
 ## 4. Criar a Instância EC2
 
+🔹 **Ambiente:** CloudShell / máquina local (admin)
+
 ### Criar Security Group
 
 ```bash
@@ -205,15 +240,17 @@ aws ec2 create-security-group \
 
 ```bash
 aws ec2 run-instances \
-  --image-id ami-0c02fb55956c7d316 \
+  --image-id resolve:ssm:/aws/service/ami-amazon-linux-latest/al2023-ami-kernel-default-x86_64 \
   --instance-type t2.micro \
   --iam-instance-profile Name=EC2KMSLabProfile \
-  --security-group-ids SG_ID \
+  --security-group-ids <INSIRA_O_SG_ID> \
   --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=ec2-lab-criptografia}]' \
   --region us-east-1
 ```
 
-> Copie o `InstanceId` retornado.
+> Em vez de fixar um ID de AMI (que muda com o tempo e varia por região), a sintaxe `resolve:ssm:` busca automaticamente a AMI mais recente do Amazon Linux 2023 no momento da execução. Assim o comando não desatualiza.
+
+> Substituir `<INSIRA_O_SG_ID>` pelo ID do security group criado no passo anterior. Copie o `InstanceId` retornado.
 
 ### Conectar via Session Manager
 
@@ -221,7 +258,7 @@ Aguardar a instância ficar em estado `running`:
 
 ```bash
 aws ec2 describe-instances \
-  --instance-ids INSTANCE_ID \
+  --instance-ids <INSIRA_O_INSTANCE_ID> \
   --query "Reservations[].Instances[].State.Name" \
   --region us-east-1
 ```
@@ -229,7 +266,7 @@ aws ec2 describe-instances \
 Conectar:
 
 ```bash
-aws ssm start-session --target INSTANCE_ID --region us-east-1
+aws ssm start-session --target <INSIRA_O_INSTANCE_ID> --region us-east-1
 ```
 
 Após conectar:
@@ -245,6 +282,8 @@ cd ~
 ---
 
 ## 5. Envelope Encryption
+
+🔹 **Ambiente:** instância EC2 (role da aplicação), conectada via Session Manager na etapa anterior
 
 ### Criar arquivo com dados sensíveis
 
@@ -327,6 +366,8 @@ Texto secreto para criptografar.
 
 ## 6. Criptografia Direta
 
+🔹 **Ambiente:** instância EC2 (role da aplicação)
+
 ### Criar arquivo
 
 ```bash
@@ -342,7 +383,7 @@ aws kms encrypt \
   --encryption-context project=practice \
   --output text \
   --query CiphertextBlob \
-  --region=us-east-1 | base64 --decode > NewSecretsEncryptedFile.txt
+  --region us-east-1 | base64 --decode > NewSecretsEncryptedFile.txt
 ```
 
 ### Verificar
@@ -359,7 +400,7 @@ aws kms decrypt \
   --encryption-context project=practice \
   --output text \
   --query Plaintext \
-  --region=us-east-1 | base64 --decode > NewSecretsDecryptedFile.txt
+  --region us-east-1 | base64 --decode > NewSecretsDecryptedFile.txt
 ```
 
 ```bash
@@ -375,6 +416,8 @@ Arquivo secreto: criptografia direta sem data key.
 
 ## 7. Testar Encryption Context
 
+🔹 **Ambiente:** instância EC2 (role da aplicação)
+
 ### Sem context (deve falhar)
 
 ```bash
@@ -382,7 +425,7 @@ aws kms decrypt \
   --ciphertext-blob fileb://NewSecretsEncryptedFile.txt \
   --output text \
   --query Plaintext \
-  --region=us-east-1
+  --region us-east-1
 ```
 
 ### Com context errado (deve falhar)
@@ -393,7 +436,7 @@ aws kms decrypt \
   --encryption-context project=errado \
   --output text \
   --query Plaintext \
-  --region=us-east-1
+  --region us-east-1
 ```
 
 ### Com context correto (deve funcionar)
@@ -404,19 +447,21 @@ aws kms decrypt \
   --encryption-context project=practice \
   --output text \
   --query Plaintext \
-  --region=us-east-1
+  --region us-east-1
 ```
 
 ---
 
 ## 8. Teste de Menor Privilégio
 
+🔹 **Ambiente:** instância EC2 (role da aplicação)
+
 Tentar uma ação não permitida pela role da EC2:
 
 ```bash
-aws kms schedule-key-deletion --key-id KEY_ID --region us-east-1
+aws kms schedule-key-deletion --key-id <INSIRA_O_KEY_ID> --region us-east-1
 ```
 
-> Substituir `KEY_ID` pelo identificador da chave `myKMSKey`. Esse comando não aceita alias.
+> Substituir `<INSIRA_O_KEY_ID>` pelo identificador da chave `myKMSKey`. Esse comando não aceita alias.
 
 **Resultado esperado:** `AccessDeniedException`

@@ -8,7 +8,7 @@ Por meio dos testes, avaliamos que os dados criptografados antes da renovação 
 
 ## Teste 1: Descriptografia de Dados Antigos
 
-O arquivo `datakeyEncrypted.txt` foi criado no Lab 01 (25 de agosto), antes da rotação de hoje (26 de agosto). Se ele continua sendo descriptografável, é porque o KMS preservou o material usado na sua criação.
+O arquivo `datakeyEncrypted.txt` foi criado no Lab 01, antes da rotação. Se ele continua sendo descriptografável, é porque o KMS preservou o material usado na sua criação.
 
 ```bash
 aws kms decrypt \

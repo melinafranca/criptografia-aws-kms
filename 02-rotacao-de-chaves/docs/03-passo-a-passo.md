@@ -39,7 +39,7 @@ Após salvar, a seção **Alternância automática de chaves** passa a exibir o 
 
 ![Rotação automática ativada](assets/rotacao-automatica-ativada.png)
 
-No meu caso, a chave foi ativada em 26 de agosto de 2026 e a próxima rotação automática está agendada para **26 de agosto de 2027** (365 dias depois). A data da última alternância aparece vazia, pois a chave ainda não passou por nenhuma rotação automática.
+No meu caso, ao ativar a rotação, a próxima rotação automática ficou agendada para **um ano depois** (365 dias). A data da última alternância aparece vazia, pois a chave ainda não passou por nenhuma rotação automática.
 
 ---
 

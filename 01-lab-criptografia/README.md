@@ -113,7 +113,7 @@ A documentação foi dividida em etapas para facilitar o acompanhamento da imple
 | Recurso | Custo estimado |
 |---------|---------------|
 | Amazon EC2 | Utilização dentro das condições do Free Tier |
-| AWS KMS | Cobrança mensal por chave armazenada, além das tarifas aplicáveis às requisições |
+| AWS KMS | ~$1.00/mês por chave armazenada |
 | Requisições ao KMS | Cobrança conforme a quantidade de operações realizadas |
 | AWS Systems Manager Session Manager | Sem custo adicional para o acesso à instância |
 | **Custo observado** | **Inferior a US$ 1,00 durante os testes realizados** |

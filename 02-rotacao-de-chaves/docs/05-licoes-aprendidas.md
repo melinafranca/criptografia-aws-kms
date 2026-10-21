@@ -16,17 +16,25 @@
 
 ## O Que Deu Errado e Como Resolvi
 
-### `list-key-rotations` não aceita alias
+### A família de comandos de rotação não aceita alias
 
-**Sintoma:** ao consultar o histórico de rotações usando o alias, o comando falhou:
+**Sintoma:** ao usar o alias em comandos de rotação, todos falharam com o mesmo erro:
 
 ```
 An error occurred (InvalidArnException): Key Aliases are not supported for this operation.
 ```
 
-**Causa:** diferente da maioria dos comandos KMS (que aceitam `alias/myKMSKey`), o `list-key-rotations` exige o Key ID ou o ARN da chave.
+**Causa:** os comandos que atuam diretamente sobre o material da chave exigem o Key ID (ou o ARN). O alias, que é um ponteiro para a chave, não é aceito nesses casos. Testando um a um, o padrão ficou claro:
 
-**Aprendizado:** nem todos os comandos KMS tratam alias e Key ID como equivalentes. Ao montar scripts de auditoria, usar o Key ID direto para operações que não aceitam alias.
+| Comando | Aceita alias? |
+|---------|:-------------:|
+| `describe-key` | ✅ Sim |
+| `enable-key-rotation` | ❌ Só Key ID |
+| `get-key-rotation-status` | ❌ Só Key ID |
+| `rotate-key-on-demand` | ❌ Só Key ID |
+| `list-key-rotations` | ❌ Só Key ID |
+
+**Aprendizado:** nem todos os comandos KMS tratam alias e Key ID como equivalentes. Operações de uso (Encrypt, Decrypt) aceitam alias, mas a família de rotação exige o Key ID. Vale resolver o alias para o Key ID antes de rodar esses comandos.
 
 ---
 

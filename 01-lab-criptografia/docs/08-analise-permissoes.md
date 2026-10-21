@@ -60,7 +60,7 @@ Isso concede 40+ ações do KMS em qualquer chave da conta. Funciona, mas abre e
     "kms:Encrypt",
     "kms:Decrypt"
   ],
-  "Resource": "arn:aws:kms:us-east-1:ACCOUNT_ID:key/KEY-ID"
+  "Resource": "arn:aws:kms:us-east-1:<ACCOUNT_ID>:key/<KEY_ID>"
 }
 ```
 

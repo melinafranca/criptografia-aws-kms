@@ -56,15 +56,15 @@ A política `AmazonSSMManagedInstanceCore` habilita a comunicação entre o agen
         "kms:Encrypt",
         "kms:Decrypt"
       ],
-      "Resource": "arn:aws:kms:us-east-1:ACCOUNT_ID:key/KEY-ID"
+      "Resource": "arn:aws:kms:us-east-1:<ACCOUNT_ID>:key/<INSIRA_O_KEY_ID>"
     }
   ]
 }
 ```
 
-5. Substituir `ACCOUNT_ID` pelo ID da sua conta e `KEY-ID` pelo ID da chave `myKMSKey` (copiado na [etapa anterior](04-criacao-chave-kms.md))
+5. Substituir `<ACCOUNT_ID>` pelo ID da sua conta e `<INSIRA_O_KEY_ID>` pelo ID da chave `myKMSKey` (copiado na [etapa anterior](04-criacao-chave-kms.md))
 
-> O `ACCOUNT_ID` pode ser consultado no canto superior direito do console AWS. Clique no nome do usuário e copie o ID da conta.
+> O ID da conta pode ser consultado no canto superior direito do console AWS. Clique no nome do usuário e copie o ID da conta.
 6. Clicar em **Avançar**
 7. Nome da política: `KMSLabEncryptPolicy`
 8. Clicar em **Criar política**
@@ -209,14 +209,14 @@ Com o princípio do menor privilégio aplicado, qualquer ação fora do escopo c
 Para validar, execute uma operação não permitida pela role (agendar exclusão da chave):
 
 ```bash
-aws kms schedule-key-deletion --key-id KEY_ID --region us-east-1
+aws kms schedule-key-deletion --key-id <INSIRA_O_KEY_ID> --region us-east-1
 ```
 
-> Substituir `KEY_ID` pelo ID da chave `myKMSKey` (copiado na etapa de criação). Esse comando não aceita alias.
+> Substituir `<INSIRA_O_KEY_ID>` pelo ID da chave `myKMSKey` (copiado na etapa de criação). Esse comando não aceita alias.
 
 **Resultado esperado:**
 ```
-An error occurred (AccessDeniedException) when calling the ScheduleKeyDeletion operation: User: arn:aws:sts::ACCOUNT_ID:assumed-role/EC2KMSLabRole/... is not authorized to perform: kms:ScheduleKeyDeletion
+An error occurred (AccessDeniedException) when calling the ScheduleKeyDeletion operation: User: arn:aws:sts::<ACCOUNT_ID>:assumed-role/EC2KMSLabRole/... is not authorized to perform: kms:ScheduleKeyDeletion
 ```
 
 ✅ Acesso negado. A instância pode criptografar e descriptografar, mas não pode deletar a chave.
