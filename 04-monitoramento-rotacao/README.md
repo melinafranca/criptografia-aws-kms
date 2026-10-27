@@ -1,11 +1,11 @@
-# 🔔 Monitoramento de Rotação de Chaves com AWS KMS
+# Monitoramento de Rotação de Chaves com AWS KMS
 
 ![KMS](https://img.shields.io/badge/KMS-Key_Rotation-purple)
 ![CloudWatch](https://img.shields.io/badge/CloudWatch-Monitoring-blue)
 ![EventBridge](https://img.shields.io/badge/EventBridge-Events-pink)
 ![Status](https://img.shields.io/badge/Status-Concluído-green)
 
-## 📋 Sobre o projeto
+## Sobre o projeto
 
 Neste laboratório, aprendi a ser notificada automaticamente quando uma chave KMS é rotacionada, sem depender de verificação manual no CloudTrail.
 
@@ -15,7 +15,7 @@ O lab implementa e compara dois caminhos de monitoramento. Toda a configuração
 
 ---
 
-## 🎯 O desafio
+## O desafio
 
 O [Lab 02](../02-rotacao-de-chaves/) validou a rotação olhando o CloudTrail manualmente. Isso não escala: ninguém acompanha o histórico todo dia. Uma rotação, principalmente uma sob demanda feita fora do ciclo, é um evento que a equipe de segurança precisa saber que aconteceu, na hora.
 
@@ -23,7 +23,7 @@ O desafio foi transformar esse evento em uma notificação automática e compara
 
 ---
 
-## 🏆 Objetivo
+## Objetivo
 
 Monitorar a rotação da chave `rotationMonitorKey` por dois caminhos independentes e comparar as abordagens:
 
@@ -32,7 +32,7 @@ Monitorar a rotação da chave `rotationMonitorKey` por dois caminhos independen
 
 ---
 
-## 🛠️ O que foi implementado
+## O que foi implementado
 
 * Criação de uma chave dedicada (`rotationMonitorKey`) com rotação automática ativada
 * Criação de uma trilha do CloudTrail entregando eventos para o CloudWatch Logs
@@ -42,7 +42,7 @@ Monitorar a rotação da chave `rotationMonitorKey` por dois caminhos independen
 
 ---
 
-## 🧰 Tecnologias e serviços utilizados
+## Tecnologias e serviços utilizados
 
 | Serviço / Ferramenta | Função no projeto |
 |----------------------|-------------------|
@@ -55,7 +55,7 @@ Monitorar a rotação da chave `rotationMonitorKey` por dois caminhos independen
 
 ---
 
-## 🏗️ Arquitetura
+## Arquitetura
 
 Os dois caminhos partem do mesmo evento do CloudTrail e chegam ao mesmo destino (email), por rotas diferentes:
 
@@ -68,19 +68,19 @@ A comparação detalhada das duas abordagens (latência, custo, quando usar cada
 
 ---
 
-## 📖 Documentação
+## Documentação
 
 | # | Documento | Descrição |
 |---|-----------|-----------|
-| 1 | 📖 [Cenário do laboratório](docs/01-cenario.md) | Contexto e problema abordado |
-| 2 | 🏗️ [Arquitetura da solução](docs/02-arquitetura.md) | Os dois caminhos e a comparação |
-| 3 | 🔔 [Passo a passo](docs/03-passo-a-passo.md) | Configuração da chave, trilha e dos dois caminhos |
-| 4 | 🧪 [Testes e validação](docs/04-testes.md) | Validação dos dois caminhos |
-| 5 | 💡 [Lições aprendidas](docs/05-licoes-aprendidas.md) | Descobertas e troubleshooting |
+| 1 | [Cenário do laboratório](docs/01-cenario.md) | Contexto e problema abordado |
+| 2 | [Arquitetura da solução](docs/02-arquitetura.md) | Os dois caminhos e a comparação |
+| 3 | [Passo a passo](docs/03-passo-a-passo.md) | Configuração da chave, trilha e dos dois caminhos |
+| 4 | [Testes e validação](docs/04-testes.md) | Validação dos dois caminhos |
+| 5 | [Lições aprendidas](docs/05-licoes-aprendidas.md) | Descobertas e troubleshooting |
 
 ---
 
-## 💰 Investimento
+## Investimento
 
 | Recurso | Custo estimado |
 |---------|---------------|
@@ -95,7 +95,7 @@ A comparação detalhada das duas abordagens (latência, custo, quando usar cada
 
 ---
 
-## ✅ Resultados
+## Resultados
 
 Ao final do laboratório, foi possível:
 
@@ -107,7 +107,7 @@ Ao final do laboratório, foi possível:
 
 ---
 
-## 👩‍💻 Autora
+## Autora
 
 **Melina França** —  AWS Developer Associate
 
