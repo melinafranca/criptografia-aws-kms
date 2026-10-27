@@ -1,4 +1,4 @@
-# 🧪 Testes e Validação
+# Testes e Validação
 
 Este documento reúne os testes que provam comportamentos além do fluxo básico. A criação, a replicação e o ciclo simples de criptografia (encrypt em `us-east-1`, decrypt em `eu-west-1`) já foram validados no [guia via CLI](../lab-via-cli.md) e não são repetidos aqui.
 

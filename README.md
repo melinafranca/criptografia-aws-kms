@@ -1,23 +1,23 @@
-# 🔐 Criptografia com AWS KMS
+# Criptografia com AWS KMS
 
 ![AWS](https://img.shields.io/badge/AWS-Cloud-orange?style=flat&logo=amazon-aws)
 ![Status](https://img.shields.io/badge/Status-Concluído-green)
 ![KMS](https://img.shields.io/badge/KMS-Encryption-purple)
 
-## 📋 Sobre o Repositório
+## Sobre o Repositório
 
-Este repositório reúne laboratórios sobre criptografia com AWS KMS. O projeto foi inspirado no AWS Cloud Quest Serverless Developer e na Trilha Developer da Escola da Nuvem. Durante a implementação, reconstruí o ambiente, documentei as decisões de segurança e venho expandindo o escopo para incluir rotação de chaves, monitoramento e replicação entre regiões.
+Este repositório reúne laboratórios sobre criptografia com AWS KMS. O projeto foi inspirado no AWS Cloud Quest Serverless Developer e na Trilha Developer da Escola da Nuvem. Durante a implementação, reconstruí o ambiente, documentei as decisões de segurança e ampliei o escopo, incluindo a rotação de chaves, monitoramento e replicação entre regiões.
 
-## 🗺️ Roadmap da Jornada
+## Roadmap da Jornada
 
-| # | Projeto | Descrição | Status |
-|---|---------|-----------|--------|
-| 1 | [Lab de Criptografia](01-lab-criptografia/) | Envelope Encryption e criptografia direta via CLI | ✅ Concluído |
-| 2 | [Rotação de Chaves](02-rotacao-de-chaves/) | Rotação automática e sob demanda de material criptográfico | ✅ Concluído |
-| 3 | [Chaves Multi-Região](03-chaves-multi-regiao/) | Replicação de chaves entre regiões para Disaster Recovery | ✅ Concluído |
-| 4 | [Monitoramento de Rotação](04-monitoramento-rotacao/) | Notificação automática de rotação via EventBridge/SNS e CloudWatch | ✅ Concluído |
+| # | Projeto | Descrição |
+|---|---------|-----------|
+| 1 | [Lab de Criptografia](01-lab-criptografia/) | Envelope Encryption e criptografia direta via CLI |
+| 2 | [Rotação de Chaves](02-rotacao-de-chaves/) | Rotação automática e sob demanda de material criptográfico |
+| 3 | [Chaves Multi-Região](03-chaves-multi-regiao/) | Replicação de chaves entre regiões para Disaster Recovery | 
+| 4 | [Monitoramento de Rotação](04-monitoramento-rotacao/) | Notificação automática de rotação via EventBridge/SNS e CloudWatch | 
 
-## 🧰 Serviços Utilizados na Jornada
+## Serviços Utilizados na Jornada
 
 | Serviço | Função |
 |---------|--------|
@@ -29,7 +29,7 @@ Este repositório reúne laboratórios sobre criptografia com AWS KMS. O projeto
 | AWS CloudTrail | Auditoria de uso das chaves |
 | OpenSSL | Criptografia local com data keys |
 
-## 💡 Sobre a Jornada
+## Sobre a Jornada
 
 Este repositório demonstra:
 
@@ -38,11 +38,11 @@ Este repositório demonstra:
 - Planejamento de continuidade (rotação e multi-região)
 - Capacidade de diagnosticar erros e entender o comportamento do serviço
 
-## 🗑️ Remoção de Recursos
+## Remoção de Recursos
 
 Ao concluir os laboratórios, consulte o [guia de remoção de recursos](REMOCAO-RECURSOS.md) para excluir todos os recursos criados de forma segura e na ordem correta.
 
-## 👩‍💻 Autora
+## Autora
 
 **Melina França** —  AWS Developer Associate
 

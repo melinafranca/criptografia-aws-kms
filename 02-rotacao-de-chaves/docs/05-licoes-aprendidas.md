@@ -1,4 +1,4 @@
-# 💡 Lições Aprendidas
+# Lições Aprendidas
 
 ## O Que Deu Certo
 

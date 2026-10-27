@@ -1,11 +1,11 @@
-# 🌎 Chaves Multi-Região com AWS KMS
+# Chaves Multi-Região com AWS KMS
 
 ![KMS](https://img.shields.io/badge/KMS-Multi--Region-purple)
 ![IAM](https://img.shields.io/badge/IAM-Security-red)
 ![DR](https://img.shields.io/badge/Disaster_Recovery-blue)
 ![Status](https://img.shields.io/badge/Status-Concluído-green)
 
-## 📋 Sobre o projeto
+## Sobre o projeto
 
 Neste laboratório, aprendi como o AWS KMS permite acessar dados criptografados em mais de uma região sem precisar descriptografar e re-criptografar tudo a cada troca de região.
 
@@ -15,7 +15,7 @@ A criação e a replicação da chave foram feitas no console da AWS, e as opera
 
 ---
 
-## 🎯 O desafio
+## O desafio
 
 Quando uma organização opera em múltiplas regiões, dados criptografados em uma região não podem ser lidos em outra com chaves de região única. O caminho tradicional (descriptografar na origem, transferir em texto plano e re-criptografar no destino) é inseguro e depende justamente da região que pode estar indisponível em um cenário de Disaster Recovery.
 
@@ -23,7 +23,7 @@ O desafio foi usar chaves multi-região do AWS KMS para eliminar essa dependênc
 
 ---
 
-## 🏆 Objetivo
+## Objetivo
 
 Criar uma chave multi-região, replicá-la para uma segunda região e validar que:
 
@@ -34,7 +34,7 @@ Criar uma chave multi-região, replicá-la para uma segunda região e validar qu
 
 ---
 
-## 🛠️ O que foi implementado
+## O que foi implementado
 
 * Criação da chave primária multi-região em `us-east-1` (console)
 * Replicação da chave para `eu-west-1` (Irlanda)
@@ -44,7 +44,7 @@ Criar uma chave multi-região, replicá-la para uma segunda região e validar qu
 
 ---
 
-## 🧰 Tecnologias e serviços utilizados
+## Tecnologias e serviços utilizados
 
 | Serviço / Ferramenta | Função no projeto |
 |----------------------|-------------------|
@@ -54,7 +54,7 @@ Criar uma chave multi-região, replicá-la para uma segunda região e validar qu
 
 ---
 
-## 🏗️ Arquitetura
+## Arquitetura
 
 ![Arquitetura](docs/assets/aws-kms-operacoes-de-criptografia-com-chaves-multi-regiao.png)
 
@@ -62,17 +62,17 @@ A chave primária em `us-east-1` e a réplica em `eu-west-1` compartilham o mesm
 
 ---
 
-## 📖 Documentação
+## Documentação
 
 A documentação foi dividida em etapas para facilitar o acompanhamento da implementação:
 
 | # | Documento | Descrição |
 |---|-----------|-----------|
-| 1 | 📖 [Cenário do laboratório](docs/01-cenario.md) | Contexto e problema abordado |
-| 2 | 🏗️ [Arquitetura da solução](docs/02-arquitetura.md) | Como funciona a replicação |
-| 3 | 🌎 [Passo a passo](docs/03-passo-a-passo.md) | Criação e replicação pelo console |
-| 4 | 🧪 [Testes e validação](docs/04-testes.md) | Fluxo bidirecional e Encryption Context |
-| 5 | 💡 [Lições aprendidas](docs/05-licoes-aprendidas.md) | Descobertas e limitações |
+| 1 | [Cenário do laboratório](docs/01-cenario.md) | Contexto e problema abordado |
+| 2 | [Arquitetura da solução](docs/02-arquitetura.md) | Como funciona a replicação |
+| 3 | [Passo a passo](docs/03-passo-a-passo.md) | Criação e replicação pelo console |
+| 4 | [Testes e validação](docs/04-testes.md) | Fluxo bidirecional e Encryption Context |
+| 5 | [Lições aprendidas](docs/05-licoes-aprendidas.md) | Descobertas e limitações |
 
 > A parte de criptografia entre regiões é feita via linha de comando. Consulte o [guia via CLI](lab-via-cli.md).
 
@@ -80,7 +80,7 @@ A documentação foi dividida em etapas para facilitar o acompanhamento da imple
 
 ---
 
-## 💰 Investimento
+## Investimento
 
 | Recurso | Custo estimado |
 |---------|---------------|
@@ -93,7 +93,7 @@ A documentação foi dividida em etapas para facilitar o acompanhamento da imple
 
 ---
 
-## ✅ Resultados
+## Resultados
 
 Ao final do laboratório, foi possível:
 
@@ -106,7 +106,7 @@ Na prática, o projeto mostrou como o KMS resolve o acesso a dados criptografado
 
 ---
 
-## 👩‍💻 Autora
+## Autora
 
 **Melina França** —  AWS Developer Associate
 

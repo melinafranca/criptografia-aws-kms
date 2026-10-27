@@ -1,4 +1,4 @@
-# 🔒 Análise de Permissões
+# Análise de Permissões
 
 Este documento registra as decisões de segurança e o raciocínio por trás de cada permissão configurada.
 

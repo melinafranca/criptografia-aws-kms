@@ -1,4 +1,4 @@
-# 📖 Cenário do Laboratório
+# Cenário do Laboratório
 
 ## Contexto
 

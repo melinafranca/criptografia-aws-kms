@@ -1,4 +1,4 @@
-# 🔑 Criação da Chave KMS
+# Criação da Chave KMS
 
 ## O Que é o AWS KMS?
 

@@ -1,4 +1,4 @@
-# 💻 Laboratório Completo via AWS CLI
+# Laboratório Completo via AWS CLI
 
 Este documento reúne todos os comandos necessários para reproduzir o laboratório de criptografia inteiramente pela linha de comando. Os conceitos e justificativas de cada etapa estão documentados nos arquivos da pasta `docs/`.
 

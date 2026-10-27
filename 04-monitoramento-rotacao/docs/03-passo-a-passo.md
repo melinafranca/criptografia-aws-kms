@@ -1,4 +1,4 @@
-# 🔔 Passo a Passo: Monitoramento de Rotação
+# Passo a Passo: Monitoramento de Rotação
 
 Este documento cobre a configuração do monitoramento de rotação de chaves KMS pelo **console da AWS**. Os mesmos passos podem ser reproduzidos via linha de comando: consulte o [guia via CLI](../lab-via-cli.md).
 

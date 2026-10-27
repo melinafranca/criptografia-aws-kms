@@ -1,4 +1,4 @@
-# 🧪 Testes e Validação
+# Testes e Validação
 
 Este documento reúne os testes que provam o funcionamento dos dois caminhos de monitoramento. O gatilho comum é a rotação sob demanda da chave `rotationMonitorKey`, disparada pelo **AWS CloudShell**, que gera o evento `RotateKeyOnDemand` no CloudTrail.
 

@@ -1,4 +1,4 @@
-# 🖥️ Criação da Instância EC2
+# Criação da Instância EC2
 
 A instância EC2 é o ambiente onde os comandos de criptografia serão executados. O Amazon Linux 2023 foi escolhido porque já inclui a AWS CLI e o OpenSSL, e o acesso via Session Manager permite conectar à instância sem a necessidade de gerenciar chaves SSH ou abrir portas de entrada no Security Group.
 

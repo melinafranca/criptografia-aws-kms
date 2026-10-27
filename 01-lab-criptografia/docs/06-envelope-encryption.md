@@ -1,4 +1,4 @@
-# 🔒 Envelope Encryption
+# Envelope Encryption
 
 ## O Que É?
 

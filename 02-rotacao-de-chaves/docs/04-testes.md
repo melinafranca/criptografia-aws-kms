@@ -1,4 +1,4 @@
-# 🧪 Testes e Validação
+# Testes e Validação
 
 Por meio dos testes, avaliamos que os dados criptografados antes da renovação continuam acessíveis e que o KMS escolhe o material correto para cada operação. Eles foram executados via CLI, na instância `ec2-lab-criptografia`, acessada via Session Manager. Para a validação, utilizei os arquivos criados e criptografados no Lab 01.
 

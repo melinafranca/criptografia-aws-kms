@@ -1,4 +1,4 @@
-# 🏗️ Arquitetura da Solução
+# Arquitetura da Solução
 
 ## Diagrama
 

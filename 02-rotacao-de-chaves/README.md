@@ -1,10 +1,10 @@
-# 🔄 Rotação de Chaves com AWS KMS
+# Rotação de Chaves com AWS KMS
 
 ![KMS](https://img.shields.io/badge/KMS-Key_Rotation-purple)
 ![IAM](https://img.shields.io/badge/IAM-Security-red)
 ![Status](https://img.shields.io/badge/Status-Concluído-green)
 
-## 📋 Sobre o projeto
+## Sobre o projeto
 
 Neste laboratório, explorei como manter chaves KMS seguras ao longo do tempo através da rotação do material criptográfico.
 
@@ -18,13 +18,13 @@ A sob demanda permite forçar uma rotação a qualquer momento. Em situações d
 
 ---
 
-## 🎯 Problema / Contexto
+## Problema / Contexto
 
 O uso de chaves criptográficas sem renovação periódica é um problema quando pensamos em proteção de dados sensíveis. Na prática, significa que o mesmo segredo protege todos os dados desde o primeiro dia. Em caso de vazamento, o acesso é total e abrange desde os dados mais antigos até os mais recentes.
 
 ---
 
-## 🏆 Objetivo
+## Objetivo
 
 Ativar e validar a rotação de chaves KMS (automática e sob demanda), demonstrando que:
 
@@ -35,7 +35,7 @@ Ativar e validar a rotação de chaves KMS (automática e sob demanda), demonstr
 
 ---
 
-## 🛠️ O que foi implementado
+## O que foi implementado
 
 Durante a implementação, foram realizadas as seguintes etapas:
 
@@ -48,7 +48,7 @@ Durante a implementação, foram realizadas as seguintes etapas:
 
 ---
 
-## 🧰 Tecnologias e serviços utilizados
+## Tecnologias e serviços utilizados
 
 | Serviço / Ferramenta | Função no projeto |
 |----------------------|-------------------|
@@ -59,7 +59,7 @@ Durante a implementação, foram realizadas as seguintes etapas:
 
 ---
 
-## 🏗️ Arquitetura
+## Arquitetura
 
 ![Arquitetura](docs/assets/arquitetura-rotacao.png)
 
@@ -67,23 +67,23 @@ A rotação não cria uma chave nova. Ela apenas troca o segredo interno, manten
 
 ---
 
-## 📖 Documentação
+## Documentação
 
 A documentação foi dividida em etapas para facilitar o acompanhamento da implementação:
 
 | # | Documento | Descrição |
 |---|-----------|-----------|
-| 1 | 📖 [Cenário do laboratório](docs/01-cenario.md) | Contexto e problema abordado |
-| 2 | 🏗️ [Arquitetura da solução](docs/02-arquitetura.md) | Como funciona a rotação internamente |
-| 3 | 🔄 [Passo a passo](docs/03-passo-a-passo.md) | Ativação e execução da rotação |
-| 4 | 🧪 [Testes e validação](docs/04-testes.md) | Validações pré e pós rotação |
-| 5 | 💡 [Lições aprendidas](docs/05-licoes-aprendidas.md) | Troubleshooting e principais aprendizados |
+| 1 |  [Cenário do laboratório](docs/01-cenario.md) | Contexto e problema abordado |
+| 2 |  [Arquitetura da solução](docs/02-arquitetura.md) | Como funciona a rotação internamente |
+| 3 | [Passo a passo](docs/03-passo-a-passo.md) | Ativação e execução da rotação |
+| 4 | [Testes e validação](docs/04-testes.md) | Validações pré e pós rotação |
+| 5 |  [Lições aprendidas](docs/05-licoes-aprendidas.md) | Troubleshooting e principais aprendizados |
 
 > Este laboratório também pode ser reproduzido inteiramente via AWS CLI. Consulte o [guia via CLI](lab-via-cli.md).
 
 ---
 
-## 💰 Investimento
+##  Investimento
 
 | Recurso | Custo estimado |
 |---------|---------------|
@@ -97,7 +97,7 @@ A documentação foi dividida em etapas para facilitar o acompanhamento da imple
 
 ---
 
-## ✅ Resultados
+## Resultados
 
 Ao final do laboratório, foi possível:
 
@@ -110,7 +110,7 @@ Ao final do laboratório, foi possível:
 
 ---
 
-## 👩‍💻 Autora
+## Autora
 
 **Melina França** —  AWS Developer Associate
 

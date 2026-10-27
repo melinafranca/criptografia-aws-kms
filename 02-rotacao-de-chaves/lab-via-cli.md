@@ -1,4 +1,4 @@
-# 💻 Rotação de Chaves via AWS CLI
+# Rotação de Chaves via AWS CLI
 
 Este documento reúne os comandos para ativar e validar a rotação de chaves KMS pela linha de comando. Os conceitos e justificativas de cada etapa estão documentados nos arquivos da pasta `docs/`.
 

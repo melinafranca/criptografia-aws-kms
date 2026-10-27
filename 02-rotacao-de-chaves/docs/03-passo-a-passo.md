@@ -1,4 +1,4 @@
-# 🔄 Passo a Passo: Rotação de Chaves
+# Passo a Passo: Rotação de Chaves
 
 Este documento cobre a ativação e a validação da rotação de chaves pelo **console da AWS**. Os mesmos passos podem ser reproduzidos via linha de comando: consulte o [guia via CLI](../lab-via-cli.md).
 

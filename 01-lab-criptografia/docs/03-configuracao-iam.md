@@ -1,4 +1,4 @@
-# 👤 Configuração IAM
+#  Configuração IAM
 
 A role criada nesta etapa define o escopo de permissões para administração das chaves, garantindo que o gerenciamento esteja separado das operações criptográficas.
 

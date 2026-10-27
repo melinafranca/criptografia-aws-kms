@@ -1,4 +1,4 @@
-# 💻 Chaves Multi-Região via AWS CLI
+# Chaves Multi-Região via AWS CLI
 
 Este documento reúne os comandos para criar, replicar e usar uma chave multi-região KMS pela linha de comando. Os conceitos e justificativas de cada etapa estão documentados nos arquivos da pasta `docs/`.
 

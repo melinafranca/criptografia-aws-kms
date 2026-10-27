@@ -1,4 +1,4 @@
-# 🌎 Passo a Passo: Chaves Multi-Região
+# Passo a Passo: Chaves Multi-Região
 
 Este documento cobre a criação e a replicação de uma chave multi-região pelo **console da AWS**. A criptografia de dados entre as regiões é feita via CLI e está no [guia via CLI](../lab-via-cli.md).
 

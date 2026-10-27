@@ -1,10 +1,10 @@
-# 🔐 Lab de Criptografia com AWS KMS
+# Lab de Criptografia com AWS KMS
 
 ![EC2](https://img.shields.io/badge/EC2-Instance-blue)
 ![KMS](https://img.shields.io/badge/KMS-Encryption-purple)
 ![IAM](https://img.shields.io/badge/IAM-Security-red)
 
-## 📋 Sobre o projeto
+## Sobre o projeto
 
 Neste laboratório, explorei diferentes formas de proteger dados armazenados em uma instância Amazon EC2 utilizando o **AWS Key Management Service (AWS KMS)**.
 
@@ -17,7 +17,7 @@ A prática foi inspirada no **AWS Cloud Quest: Serverless Developer** e na **Tri
 
 ---
 
-## 🎯 O desafio
+## O desafio
 
 Dados armazenados em servidores podem conter informações sensíveis, como senhas, tokens ou dados pessoais. Quando esses arquivos permanecem em texto aberto, qualquer acesso indevido ao ambiente pode representar um risco à confidencialidade dessas informações.
 
@@ -27,7 +27,7 @@ Além da implementação, também explorei aspectos relacionados ao controle de 
 
 ---
 
-## 🏆 Objetivo
+##  Objetivo
 
 Implementar e validar dois métodos de criptografia utilizando o AWS KMS:
 
@@ -45,7 +45,7 @@ Nesse caso, os dados são enviados ao KMS para serem criptografados, respeitando
 
 ---
 
-## 🛠️ O que foi implementado
+##  O que foi implementado
 
 Durante a implementação, foram realizadas as seguintes etapas:
 
@@ -63,7 +63,7 @@ Durante a implementação, foram realizadas as seguintes etapas:
 
 ---
 
-## 🧰 Tecnologias e serviços utilizados
+##  Tecnologias e serviços utilizados
 
 | Serviço / Ferramenta | Função no projeto |
 |----------------------|-------------------|
@@ -76,7 +76,7 @@ Durante a implementação, foram realizadas as seguintes etapas:
 
 ---
 
-## 🏗️ Arquitetura
+##  Arquitetura
 
 ![Arquitetura da Solução](docs/assets/diagrama-criptografia-kms.drawio.png)
 
@@ -86,21 +86,21 @@ No fluxo de **Envelope Encryption**, o KMS é responsável pela geração e prot
 
 ---
 
-## 📖 Documentação
+## Documentação
 
 A documentação foi dividida em etapas para facilitar o acompanhamento da implementação:
 
 | # | Documento | Descrição |
 |---|-----------|-----------|
-| 1 | 📖 [Cenário do laboratório](docs/01-cenario.md) | Contexto e problema abordado |
-| 2 | 🏗️ [Arquitetura da solução](docs/02-arquitetura.md) | Componentes e fluxo da solução |
-| 3 | 👤 [Configuração IAM](docs/03-configuracao-iam.md) | Criação e configuração das permissões |
-| 4 | 🔑 [Criação da chave KMS](docs/04-criacao-chave-kms.md) | Configuração da chave utilizada no laboratório |
-| 5 | 🖥️ [Criação da EC2](docs/05-criacao-ec2.md) | Configuração da instância e do acesso via Session Manager |
-| 6 | 📦 [Envelope Encryption](docs/06-envelope-encryption.md) | Geração da data key e criptografia com OpenSSL |
-| 7 | 🔐 [Criptografia direta com KMS](docs/07-criptografia-direta.md) | Utilização das operações Encrypt e Decrypt |
-| 8 | 🔒 [Análise de permissões](docs/08-analise-permissoes.md) | Controle de acesso, auditoria e integrações |
-| 9 | 💡 [Lições aprendidas](docs/09-licoes-aprendidas.md) | Troubleshooting e principais aprendizados |
+| 1 | [Cenário do laboratório](docs/01-cenario.md) | Contexto e problema abordado |
+| 2 |  [Arquitetura da solução](docs/02-arquitetura.md) | Componentes e fluxo da solução |
+| 3 |  [Configuração IAM](docs/03-configuracao-iam.md) | Criação e configuração das permissões |
+| 4 |  [Criação da chave KMS](docs/04-criacao-chave-kms.md) | Configuração da chave utilizada no laboratório |
+| 5 |  [Criação da EC2](docs/05-criacao-ec2.md) | Configuração da instância e do acesso via Session Manager |
+| 6 |  [Envelope Encryption](docs/06-envelope-encryption.md) | Geração da data key e criptografia com OpenSSL |
+| 7 |  [Criptografia direta com KMS](docs/07-criptografia-direta.md) | Utilização das operações Encrypt e Decrypt |
+| 8 |  [Análise de permissões](docs/08-analise-permissoes.md) | Controle de acesso, auditoria e integrações |
+| 9 |  [Lições aprendidas](docs/09-licoes-aprendidas.md) | Troubleshooting e principais aprendizados |
 
 > Este laboratório também pode ser reproduzido inteiramente via AWS CLI. Consulte o [guia via CLI](lab-via-cli.md).
 
@@ -108,7 +108,7 @@ A documentação foi dividida em etapas para facilitar o acompanhamento da imple
 
 ---
 
-## 💰 Custos
+##  Custos
 
 | Recurso | Custo estimado |
 |---------|---------------|
@@ -122,7 +122,7 @@ A documentação foi dividida em etapas para facilitar o acompanhamento da imple
 
 ---
 
-## ✅ Resultados
+##  Resultados
 
 Ao final do laboratório, foi possível:
 
@@ -140,7 +140,7 @@ Na prática, o projeto permitiu comparar dois modelos de criptografia e compreen
 
 ---
 
-## 👩‍💻 Autora
+## Autora
 
 **Melina França** —  AWS Developer Associate
 

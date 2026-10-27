@@ -1,4 +1,4 @@
-# 🔐 Criptografia Direta via KMS
+# Criptografia Direta via KMS
 
 ## O Que É?
 
