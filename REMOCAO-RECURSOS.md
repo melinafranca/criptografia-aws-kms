@@ -1,4 +1,4 @@
-# 🗑️ Remoção de Recursos
+# Remoção de Recursos
 
 Este documento orienta a remoção de todos os recursos criados ao longo dos laboratórios deste repositório. Siga a ordem indicada para evitar erros de dependência.
 
